@@ -1,0 +1,55 @@
+.main {
+    border-top: 1rpx solid #e0e0e0;
+}
+/* 计划输入框 */
+.plan-input {
+    display: flex;
+    align-items: center;
+    margin: 20rpx;
+    padding: 20rpx;
+    border: 2rpx solid #e0e0e0;
+    border-radius: 16rpx;
+    box-shadow: 0 0 10rpx #e0e0e0;
+    font-size: 36rpx;
+}
+.plan-input image {
+    width: 46rpx;
+    height: 46rpx;
+    margin-right: 14rpx;
+}
+.plan-input input {
+    display: inline-block;
+    color: #666;
+}
+/* 计划显示表 */
+.todos {
+    margin: 20rpx;
+    border: 2rpx solid #e0e0e0;
+    border-radius: 16rpx;
+    box-shadow: 0 0 8rpx #e0e0e0;
+}
+.todos .items {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    border-bottom: 2rpx solid #e0e0e0;
+}
+.todos .items:last-child {
+    border-bottom: none;
+}
+.todos text {
+    flex: 1;
+    margin-left: 16rpx;
+    color: #333;
+}
+.completed text {
+    color: #a0a0a0;
+    text-decoration: line-through;
+}
+/* 底部操作 */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 20rpx;
+    color: #a0a0a0;
+}
