@@ -1,0 +1,22 @@
+<view class="main">
+  <!-- 计划输入框 -->
+  <view class="plan-input">
+    <image src="../../assets/plus.png"></image>
+    <input type="text" placeholder="Anything here..." model:value="{{ planInput }}"></input>
+  </view>
+  <!-- 计划显示表 -->
+  <view class="todos">
+    <!-- 列表渲染 -->
+    <view class="items {{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}">
+      <icon type="{{ item.completed ? 'success' : 'circle' }}"></icon>
+  	  <text>{{ item.name }}</text>
+  	  <icon type="clear"></icon>
+    </view>
+  </view>
+  <!-- 底部操作 -->
+  <view class="footer">
+    <text>Toggle all</text>
+    <text>2 items left</text>
+    <text>Clear completed</text>
+  </view>
+</view>
