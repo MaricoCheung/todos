@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "Todos"
+    "navigationBarTitleText": "Todos",
+    "mp-tabbar": "weui-miniprogram/tabbar/tabbar"
+
 }

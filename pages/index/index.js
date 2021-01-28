@@ -4,11 +4,11 @@ Page({
     data: {
         todoInput: '',
         todos: [
-            { name: 'Learn java', finished: false },
-            { name: 'Learn c++', finished: true },
-            { name: 'Learn python', finished: false }
+            { name: 'Learning How Todo', finished: false },
+            { name: 'Learning How Todo', finished: true }
         ],
-        todoLeft: 2,
+        todoLeft: 1,
+        allFinished: false
     },
     // 页面的用户交互处理函数（注册事件：输入框传值、点击添加、状态切换、剩余显示、单删、全删、清空显示）
     inputChangeHandle (e) {
@@ -44,12 +44,36 @@ Page({
     todoDeleteHandle (e) {
         /*1、找到点击对应的小图标
         2、事件绑定，且创建自定义属性索引列表[注意事件冒泡]
-        2、调用splice方法[注意剩余显示、涉及到完成状态]
+        2、调用splice方法返回数组[注意剩余显示、涉及到完成状态]
         3、重新渲染页面数据
         */
         const todos = this.data.todos
         const todoDelete = todos.splice(e.currentTarget.dataset.index, 1)[0]
         const todoLeft = this.data.todoLeft + (todoDelete.finished ? 0 : -1)
         this.setData({ todos: todos, todoLeft: todoLeft })
+    },
+    toggleAllHandle () {
+        /*1、
+        遍历元素的属性变更
+        显示剩余要么为0要么为数组长度
+        */
+       this.data.allFinished = !this.data.allFinished
+       const todos = this.data.todos
+       const that = this
+       todos.forEach(item => {
+           item.finished = that.data.allFinished
+       });
+       const todoLeft = this.data.allFinished ? 0 : this.data.todos.length
+       this.setData({ todos: this.data.todos, todoLeft: todoLeft })
+    },
+    clearAllHandle () {
+        /*
+        用filter方法过滤
+        返回未完成的任务
+        */
+        const todos = this.data.todos.filter(item => {
+            return !item.finished
+        })
+        this.setData({ todos: todos })
     }
 })
