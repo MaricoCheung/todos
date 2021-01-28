@@ -19,6 +19,7 @@
 }
 .plan-input input {
     display: inline-block;
+    flex: 1;
     color: #666;
 }
 /* 计划显示表 */
@@ -52,4 +53,20 @@
     justify-content: space-between;
     margin: 20rpx;
     color: #a0a0a0;
+}
+.empty {
+    display: flex;
+    flex-direction: column;
+    margin: 20rpx;
+    padding: 10rpx;
+    text-align: center;
+}
+.title {
+    margin: 150rpx 50rpx 50rpx;
+    font-size: 60rpx;
+    color: #333;
+    text-shadow: 0 0 5rpx #333;
+}
+.content {
+    color: #777;
 }

@@ -1,23 +1,33 @@
 <view class="main">
-  <!-- 计划输入框 -->
+  <!-- 计划输入框(优化用户体验->回车即可) -->
   <view class="plan-input">
     <image src="../../assets/plus.png" bindtap="addTodoHandle"></image>
-    <input type="text" placeholder="Anything here..." model:value="{{ todoInput }}" bindinput="inputChangeHandle"></input>
+    <input type="text" placeholder="Make something..." 
+    value="{{ todoInput }}" bindinput="inputChangeHandle" 
+    bindconfirm="addTodoHandle"></input>
   </view>
-  <!-- 计划显示表 -->
-  <view class="todos">
-    <!-- 列表渲染 -->
-    <view class="items {{ item.finished ? ' finished' : '' }}" 
-    wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
-      <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
-  	  <text>{{ item.name }}</text>
-  	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>
+  <block wx:if="{{ todos.length }}">
+    <!-- 计划显示表(用block标签作为控制载体，提高渲染效率) -->
+    <view class="todos">
+      <!-- 列表渲染 -->
+      <view class="items {{ item.finished ? ' finished' : '' }}" 
+      wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+        <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
+    	  <text>{{ item.name }}</text>
+    	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>
+      </view>
     </view>
-  </view>
-  <!-- 底部操作 -->
-  <view class="footer">
-    <text>Toggle all</text>
-    <text wx-if="{{ todoLeft }}">{{ todoLeft }} {{ todoLeft > 1 ? 'tasks' : 'task' }} left</text>
-    <text>Clear finished</text>
-  </view>
+    <!-- 底部操作 -->
+    <view class="footer">
+      <text bindtap="toggleAllHandle">Toggle all</text>
+      <text wx-if="{{ todoLeft }}">{{ todoLeft }} {{ todoLeft > 1 ? 'tasks' : 'task' }} left</text>
+      <text bindtap="clearAllHandle">Clear finished</text>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="empty">
+      <text class="title">Congratulations!</text>
+      <text class="content">There's no more tasks left.</text>
+    </view>
+  </block>
 </view>
