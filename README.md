@@ -3,7 +3,11 @@ a simple planning list for wechat mini program
 
 ## Preview
 
-![preview on wechat](https://github.com/MaricoCheung/wx-todos/blob/main/assets/preview.png)
+<div style="display: flex">
+ <img src="https://github.com/MaricoCheung/wx-todos/blob/main/assets/prototype.png" height="498" style="flex: 1"/>
+  <img src="https://github.com/MaricoCheung/wx-todos/blob/main/assets/preview.png" height="498" style="flex: 1"/>
+</div>
+
 
 ## Functions
 
