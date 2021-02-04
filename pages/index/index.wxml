@@ -1,4 +1,4 @@
-<view class="main">
+<scroll-view class="main" id="{{ themeText.text == '深色主题' ? 'dark' : ''}}" scroll-y="true" bindscrolltoupper="upper">
   <!-- 计划输入框(优化用户体验->回车即可) -->
   <view class="plan-input">
     <image src="../../assets/plus.png" bindtap="addTodoHandle"></image>
@@ -11,7 +11,8 @@
     <view class="todos">
       <!-- 列表渲染 -->
       <view class="items {{ item.finished ? ' finished' : '' }}" 
-      wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+      wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}" 
+      id="{{ themeText.text == '深色主题' ? 'dark-text' : ''}}">
         <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
     	  <text>{{ item.name }}</text>
     	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>
@@ -30,4 +31,17 @@
       <text class="content">There's no more tasks left.</text>
     </view>
   </block>
+</scroll-view>
+<!-- 底部固定菜单栏 -->
+<view class="menu" id="{{ themeText.text == '深色主题' ? 'dark' : ''}}">
+    <view bindtap="langSelectHandle">{{langText.text}}</view>
+    <view bindtap="themeSelectHandle">{{themeText.text}}</view>
+    <view>Me</view>
+    <!-- 引入抽屉组件 -->
+    <mp-actionSheet bindactiontap="langSelect" show="{{showLangSheet}}" 
+    actions="{{langSelect}}" show-cancel="" title="选择语言">
+    </mp-actionSheet>
+    <mp-actionSheet bindactiontap="themeSelect" show="{{showThemeSheet}}" 
+    actions="{{themeSelect}}" show-cancel="" title="选择主题">
+    </mp-actionSheet>
 </view>
