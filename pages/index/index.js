@@ -8,7 +8,23 @@ Page({
             { name: 'Learning How Todo', finished: true }
         ],
         todoLeft: 1,
-        allFinished: false
+        allFinished: false, // 标识符
+
+        showLangSheet: false,
+        langSelect: [
+            { text: '中文', type: 'warn', value: 1 },
+            { text: '언어', value: 2 },
+            { text: 'English', value: 3 },
+            { text: 'ランゲージ', value: 4 }
+        ],
+        langText: { text: 'Language' },
+
+        showThemeSheet: false,
+        themeSelect: [
+            { text: '白光主题', type: 'warn', value: 1 },
+            { text: '深色主题', value: 2 },
+        ],
+        themeText: { text: '白光主题' },
     },
     // 页面的用户交互处理函数（注册事件：输入框传值、点击添加、状态切换、剩余显示、单删、全删、清空显示）
     inputChangeHandle (e) {
@@ -75,5 +91,42 @@ Page({
             return !item.finished
         })
         this.setData({ todos: todos })
-    }
+    },
+
+    // 底部固定菜单栏抽屉
+    langSelectHandle: function () {
+        this.setData({
+            showLangSheet: true
+        })
+    },
+    langSelectClose: function () {
+        this.setData({
+            showLangSheet: false
+        })
+    },
+    langSelect(e) {
+        let lang = this.data.langSelect[e.detail.index];
+        this.setData({
+            langText: lang
+        })
+        this.langSelectClose()
+    },
+
+    themeSelectHandle: function () {
+        this.setData({
+            showThemeSheet: true
+        })
+    },
+    themeSelectClose: function () {
+        this.setData({
+            showThemeSheet: false
+        })
+    },
+    themeSelect(e) {
+        let theme = this.data.themeSelect[e.detail.index];
+        this.setData({
+            themeText: theme
+        })
+        this.themeSelectClose()
+    },
 })
