@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "Todos",
+    "navigationBarBackgroundColor": "#fff",
     "usingComponents": {
         "mp-actionSheet": "../../miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
     }

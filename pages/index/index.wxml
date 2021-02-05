@@ -1,10 +1,11 @@
-<scroll-view class="main" id="{{ themeText.text == '深色主题' ? 'dark' : ''}}" scroll-y="true" bindscrolltoupper="upper">
+<view class="main" id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark' : ''}}" 
+scroll-y="true" bindscrolltoupper="upper">
   <!-- 计划输入框(优化用户体验->回车即可) -->
   <view class="plan-input">
     <image src="../../assets/plus.png" bindtap="addTodoHandle"></image>
-    <input type="text" placeholder="Make something..." 
+    <input type="text" placeholder="{{langText.text == '中文' ? '立下小目标...' : 'Make something...'}}" 
     value="{{ todoInput }}" bindinput="inputChangeHandle" 
-    bindconfirm="addTodoHandle"></input>
+    bindconfirm="addTodoHandle" id="todoInput"></input>
   </view>
   <block wx:if="{{ todos.length }}">
     <!-- 计划显示表(用block标签作为控制载体，提高渲染效率) -->
@@ -12,7 +13,7 @@
       <!-- 列表渲染 -->
       <view class="items {{ item.finished ? ' finished' : '' }}" 
       wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}" 
-      id="{{ themeText.text == '深色主题' ? 'dark-text' : ''}}">
+      id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark-text' : ''}}">
         <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
     	  <text>{{ item.name }}</text>
     	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>
@@ -20,28 +21,29 @@
     </view>
     <!-- 底部操作 -->
     <view class="footer">
-      <text bindtap="toggleAllHandle">Toggle all</text>
+      <text bindtap="toggleAllHandle">{{toggleAll}}</text>
       <text wx-if="{{ todoLeft }}">{{ todoLeft }} {{ todoLeft > 1 ? 'tasks' : 'task' }} left</text>
-      <text bindtap="clearAllHandle">Clear finished</text>
+      <text bindtap="clearAllHandle">{{cleFin}}</text>
     </view>
+    <view class="timer" bindtap="onLoad">{{time}}</view>
   </block>
   <block wx:else>
     <view class="empty">
-      <text class="title">Congratulations!</text>
-      <text class="content">There's no more tasks left.</text>
+      <text class="title">{{empTit}}</text>
+      <text class="content">{{empCon}}</text>
     </view>
   </block>
-</scroll-view>
+</view>
 <!-- 底部固定菜单栏 -->
-<view class="menu" id="{{ themeText.text == '深色主题' ? 'dark' : ''}}">
+<view class="menu" id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark' : ''}}">
     <view bindtap="langSelectHandle">{{langText.text}}</view>
     <view bindtap="themeSelectHandle">{{themeText.text}}</view>
-    <view>Me</view>
+    <view>{{Me}}</view>
     <!-- 引入抽屉组件 -->
     <mp-actionSheet bindactiontap="langSelect" show="{{showLangSheet}}" 
-    actions="{{langSelect}}" show-cancel="" title="选择语言">
+    actions="{{langSelect}}" show-cancel="">
     </mp-actionSheet>
     <mp-actionSheet bindactiontap="themeSelect" show="{{showThemeSheet}}" 
-    actions="{{themeSelect}}" show-cancel="" title="选择主题">
+    actions="{{themeSelect}}" show-cancel="">
     </mp-actionSheet>
 </view>
