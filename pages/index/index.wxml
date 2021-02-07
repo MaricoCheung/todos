@@ -1,5 +1,4 @@
-<view class="main" id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark' : ''}}" 
-scroll-y="true" bindscrolltoupper="upper">
+<view class="main" id="{{ themeText.text == 'dark'? 'dark' : ''}}">
   <!-- 计划输入框(优化用户体验->回车即可) -->
   <view class="plan-input">
     <image src="../../assets/plus.png" bindtap="addTodoHandle"></image>
@@ -13,7 +12,7 @@ scroll-y="true" bindscrolltoupper="upper">
       <!-- 列表渲染 -->
       <view class="items {{ item.finished ? ' finished' : '' }}" 
       wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}" 
-      id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark-text' : ''}}">
+      id="{{ themeText.text == 'dark' ? 'dark-text' : ''}}">
         <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
     	  <text>{{ item.name }}</text>
     	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>
@@ -35,7 +34,7 @@ scroll-y="true" bindscrolltoupper="upper">
   </block>
 </view>
 <!-- 底部固定菜单栏 -->
-<view class="menu" id="{{ themeText.text == 'dark' || '黑色主题' ? 'dark' : ''}}">
+<view class="menu" id="{{ themeText.text == 'dark' ? 'dark' : ''}}">
     <view bindtap="langSelectHandle">{{langText.text}}</view>
     <view bindtap="themeSelectHandle">{{themeText.text}}</view>
     <view>{{Me}}</view>
