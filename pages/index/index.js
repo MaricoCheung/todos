@@ -19,9 +19,7 @@ Page({
         showLangSheet: false,
         langSelect: [
             { text: '中文', value: 1 },
-            { text: '언어', value: 2 },
-            { text: 'English', type: 'warn', value: 3 },
-            { text: 'ランゲージ', value: 4 }
+            { text: 'English', type: 'warn', value: 2 }
         ],
         langText: { text: 'Language' },
 
@@ -32,7 +30,10 @@ Page({
         ],
         themeText: { text: 'theme' },
 
-        Me: 'Me'
+        Me: 'Me',
+
+        // 数据缓存
+        userRec: []
     },
 
 
@@ -150,9 +151,57 @@ Page({
                         { name: '和喜欢的人去逛街', finished: true }],
                 toggleAll: '全部切换', cleFin: '清除已完成', empTit: '原来秀儿就是你呀！', 
                 empCon: '已完成所有的任务清单。', themeText: {text: '主题'}, 
+                langSelect: [
+                    { text: '中文', type: 'warn', value: 1 },
+                    { text: 'English', value: 2 }
+                ],
                 themeSelect: [{ text: '白光主题', type: 'warn', value: 1 },
                               { text: '深色主题', value: 2 }], Me: '我的'})
+
         }
+
+        if (this.data.langText.text == 'English') {
+            wx.setNavigationBarTitle({
+                title: 'Todos'
+              })
+            this.setData({
+                todos: [{ name: 'Recite words on baicizhan', finished: false },
+                        { name: 'Run two laps for 800 meters', finished: true }],
+                toggleAll: 'Toggle all', cleFin: 'Clear Finished', empTit: 'Congratulations!', 
+                empCon: "There's no more tasks left.", themeText: {text: 'Theme'}, 
+                langSelect: [
+                    { text: '中文', value: 1 },
+                    { text: 'English', type: 'warn', value: 2 }
+                ],
+                themeSelect: [{ text: 'light', type: 'warn', value: 1 },
+                              { text: 'dark', value: 2 }], Me: 'Me'})
+
+
+            if (this.data.themeText.text== 'dark') {
+                wx.setNavigationBarColor({
+                    frontColor: '#ffffff',
+                    backgroundColor: '#111',
+                  })
+                this.setData({
+                themeSelect: [
+                    { text: 'light', value: 1 },
+                    { text: 'dark', type: 'warn', value: 2 },
+                ],
+                })
+            } else if (this.data.themeText.text== 'light') {
+                wx.setNavigationBarColor({
+                    frontColor: '#000000',
+                    backgroundColor: '#fff',
+                })
+                this.setData({
+                themeSelect: [
+                    { text: 'light', type: 'warn', value: 1 },
+                    { text: 'dark', value: 2 },
+                ],
+                })
+            }
+        }
+
         this.langSelectClose()
     },
     // 切换主题色
@@ -172,22 +221,64 @@ Page({
             themeText: theme
         })
         // var text = this.data.themeText.text
-        if ( this.data.themeText.text== 'dark' || this.data.themeText.text== '黑色主题' || 
-        this.data.themeText.text== '어두운' || this.data.themeText.text== 'ダーク') {
+        if ( this.data.themeText.text== 'dark') {
             wx.setNavigationBarColor({
                 frontColor: '#ffffff',
                 backgroundColor: '#111',
               })
+        this.setData({
+            themeSelect: [
+                { text: 'light', value: 1 },
+                { text: 'dark', type: 'warn', value: 2 },
+            ],
+        })
         }
-        if ( this.data.themeText.text == 'light' || this.data.themeText.text== '白光主题' ||  
-        this.data.themeText.text== '빛' || this.data.themeText.text== 'ライト') {
-            wx.setNavigationBarColor({
-                frontColor: '#000000',
-                backgroundColor: '#fff',
+        if ( this.data.themeText.text == 'light') {
+                wx.setNavigationBarColor({
+                    frontColor: '#000000',
+                    backgroundColor: '#fff',
+                })
+            this.setData({
+                themeSelect: [
+                    { text: 'light', type: 'warn', value: 1 },
+                    { text: 'dark', value: 2 },
+                ],
             })
         }
         this.themeSelectClose()
     },
 
+    themeSelect(e) {
+        let theme = this.data.themeSelect[e.detail.index];
+        this.setData({
+            themeText: theme
+        })
+        // var text = this.data.themeText.text
+        if (this.data.themeText.text== '深色主题') {
+            wx.setNavigationBarColor({
+                frontColor: '#ffffff',
+                backgroundColor: '#111',
+              })
+            this.setData({
+            themeSelect: [
+                { text: '白光主题', value: 1 },
+                { text: '深色主题', type: 'warn', value: 2 },
+            ],
+            })
+        } else if (this.data.themeText.text== '白光主题') {
+            wx.setNavigationBarColor({
+                frontColor: '#000000',
+                backgroundColor: '#fff',
+            })
+            this.setData({
+            themeSelect: [
+                { text: '白光主题', type: 'warn', value: 1 },
+                { text: '深色主题', value: 2 },
+            ],
+            })
+        }
+        this.themeSelectClose()
+    },
 
+    // 记录缓存
 })
