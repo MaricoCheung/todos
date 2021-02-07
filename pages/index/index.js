@@ -31,9 +31,6 @@ Page({
         themeText: { text: 'theme' },
 
         Me: 'Me',
-
-        // 数据缓存
-        userRec: []
     },
 
 
@@ -248,37 +245,4 @@ Page({
         this.themeSelectClose()
     },
 
-    themeSelect(e) {
-        let theme = this.data.themeSelect[e.detail.index];
-        this.setData({
-            themeText: theme
-        })
-        // var text = this.data.themeText.text
-        if (this.data.themeText.text== '深色主题') {
-            wx.setNavigationBarColor({
-                frontColor: '#ffffff',
-                backgroundColor: '#111',
-              })
-            this.setData({
-            themeSelect: [
-                { text: '白光主题', value: 1 },
-                { text: '深色主题', type: 'warn', value: 2 },
-            ],
-            })
-        } else if (this.data.themeText.text== '白光主题') {
-            wx.setNavigationBarColor({
-                frontColor: '#000000',
-                backgroundColor: '#fff',
-            })
-            this.setData({
-            themeSelect: [
-                { text: '白光主题', type: 'warn', value: 1 },
-                { text: '深色主题', value: 2 },
-            ],
-            })
-        }
-        this.themeSelectClose()
-    },
-
-    // 记录缓存
 })
