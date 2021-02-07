@@ -11,8 +11,7 @@
     <view class="todos">
       <!-- 列表渲染 -->
       <view class="items {{ item.finished ? ' finished' : '' }}" 
-      wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}" 
-      id="{{ themeText.text == 'dark' ? 'dark-text' : ''}}">
+      wx:key="index" wx:for="{{ todos }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
         <icon type="{{ item.finished ? 'success' : 'circle' }}"></icon>
     	  <text>{{ item.name }}</text>
     	  <icon type="clear" catchtap="todoDeleteHandle" data-index="{{ index }}"></icon>

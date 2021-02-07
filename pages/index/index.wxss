@@ -109,6 +109,6 @@ page {
     background-color: #202020;
     color: whitesmoke;
 }
-#dark-text {
-    color: #fff;
+.dark-text {
+    color: whitesmoke;
 }
